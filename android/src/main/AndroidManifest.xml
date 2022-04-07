@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.haltech.hal_barcodescan">
+    <uses-permission android:name="android.permission.CAMERA" />
+    <application>
+        <activity
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name="com.haltech.hal_barcodescan.BarcodeScannerActivity" />
+    </application>
+</manifest>
