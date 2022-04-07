@@ -1,6 +1,6 @@
 name: hal_barcodescan
 description: A flutter plugin for scanning 2D barcodes and QRCodes.
-version: 1.0.1
+version: 1.0.2
 homepage:
 
 environment:

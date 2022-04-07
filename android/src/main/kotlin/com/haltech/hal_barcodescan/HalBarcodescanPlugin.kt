@@ -23,7 +23,7 @@ class HalBarcodescanPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
     /// when the Flutter Engine is detached from the Activity
     private lateinit var channel: MethodChannel
-    private lateinit var result: Result
+    private var result: Result? = null
     private var activity: FlutterActivity? = null
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
@@ -51,6 +51,10 @@ class HalBarcodescanPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     }
 
     private fun showBarcodeView() {
+        Log.d(
+            "HALBarcodeScanPlugin",
+            "result set: ${this.result != null}"
+        )
         if (activity == null) {
             Log.e(
                 "HALBarcodeScanPlugin",
@@ -63,13 +67,17 @@ class HalBarcodescanPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     }
 
     override fun onActivityResult(code: Int, resultCode: Int, data: Intent?): Boolean {
+        Log.d(
+            "HALBarcodeScanPlugin",
+            "result set: ${this.result != null}\n" + "data set ${data != null}"
+        )
         if (code == 100) {
             if (resultCode == Activity.RESULT_OK) {
                 val barcode = data?.getStringExtra("SCAN_RESULT")
-                barcode?.let { this.result.success(barcode) }
+                barcode?.let { this.result?.success(barcode) }
             } else {
                 val errorCode = data?.getStringExtra("ERROR_CODE")
-                this.result.error(errorCode, null, null)
+                errorCode?.let { this.result?.error(errorCode, null, null) }
             }
             return true
         }
