@@ -8,13 +8,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.zxing.Result
 import com.haltech.hal_barcodescan.views.ZXingScannerView
-import io.flutter.embedding.android.FlutterActivity
 
 
-class BarcodeScannerActivity : FlutterActivity(), ZXingScannerView.ResultHandler {
+class BarcodeScannerActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
     lateinit var scannerView: ZXingScannerView
 

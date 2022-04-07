@@ -41,13 +41,13 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 22
     }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.zxing:core:3.3.1'
+    implementation 'com.google.zxing:core:3.3.3'
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0@aar'
 }

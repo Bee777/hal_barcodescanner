@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.util.Log
 import androidx.annotation.NonNull
-import io.flutter.embedding.android.FlutterActivity
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -24,7 +23,7 @@ class HalBarcodescanPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     /// when the Flutter Engine is detached from the Activity
     private lateinit var channel: MethodChannel
     private var result: Result? = null
-    private var activity: FlutterActivity? = null
+    private var activity: Activity? = null
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "hal_barcodescan")
@@ -51,10 +50,6 @@ class HalBarcodescanPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     }
 
     private fun showBarcodeView() {
-        Log.d(
-            "HALBarcodeScanPlugin",
-            "result set: ${this.result != null}"
-        )
         if (activity == null) {
             Log.e(
                 "HALBarcodeScanPlugin",
@@ -67,10 +62,6 @@ class HalBarcodescanPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     }
 
     override fun onActivityResult(code: Int, resultCode: Int, data: Intent?): Boolean {
-        Log.d(
-            "HALBarcodeScanPlugin",
-            "result set: ${this.result != null}\n" + "data set ${data != null}"
-        )
         if (code == 100) {
             if (resultCode == Activity.RESULT_OK) {
                 val barcode = data?.getStringExtra("SCAN_RESULT")
@@ -85,7 +76,7 @@ class HalBarcodescanPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        activity = binding.activity as FlutterActivity
+        activity = binding.activity
         binding.addActivityResultListener(this)
     }
 
@@ -94,7 +85,7 @@ class HalBarcodescanPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-        activity = binding.activity as FlutterActivity
+        activity = binding.activity
         binding.addActivityResultListener(this)
     }
 
