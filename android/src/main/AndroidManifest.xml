@@ -3,7 +3,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <application>
         <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:name="com.haltech.hal_barcodescan.BarcodeScannerActivity" />
     </application>
 </manifest>
