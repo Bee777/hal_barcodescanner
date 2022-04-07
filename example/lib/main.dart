@@ -66,8 +66,6 @@ class _MyAppState extends State<MyApp> {
     } catch (e) {
       setState(() => _barcode = 'Unknown error: $e');
     }
-
-    print('ok');
   }
 
   @override
